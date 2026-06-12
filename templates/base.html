@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Spine Health Risk Assessment{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+          <path d="M16 4 L16 28 M12 8 Q16 6 20 8 M11 13 Q16 11 21 13 M10 18 Q16 16 22 18 M11 23 Q16 21 21 23" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00D4FF"/>
+              <stop offset="100%" stop-color="#0066FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-text">SpineAI</span>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a></li>
+      <li><a href="/assessment" class="nav-link {% if request.endpoint == 'assessment' %}active{% endif %}">Assessment</a></li>
+      <li><a href="/analytics" class="nav-link {% if request.endpoint == 'analytics' %}active{% endif %}">Analytics</a></li>
+      <li><a href="/about" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
+      <li><a href="/assessment" class="nav-cta">Start Assessment</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="8" fill="url(#footLogoGrad)"/>
+        <path d="M16 4 L16 28 M12 8 Q16 6 20 8 M11 13 Q16 11 21 13 M10 18 Q16 16 22 18 M11 23 Q16 21 21 23" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="footLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00D4FF"/>
+            <stop offset="100%" stop-color="#0066FF"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>SpineAI</span>
+    </div>
+    <p class="footer-tagline">ML-Powered Spinal Health Risk Assessment</p>
+    <p class="footer-disclaimer">⚠️ This tool is for educational and informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/assessment">Assessment</a>
+      <a href="/analytics">Analytics</a>
+      <a href="/about">About</a>
+    </div>
+    <p class="footer-copy">© 2024 Spine Health Risk Assessment · Built with PCA + K-Means Clustering</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

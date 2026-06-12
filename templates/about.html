@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% block title %}About — SpineAI{% endblock %}
+
+{% block content %}
+<section class="about-section">
+  <div class="about-bg">
+    <div class="hero-orb hero-orb-1" style="opacity:0.2"></div>
+  </div>
+  <div class="about-container">
+
+    <!-- Header -->
+    <div class="about-header">
+      <div class="section-tag">Open Source · Healthcare ML</div>
+      <h1 class="about-title">About SpineAI</h1>
+      <p class="about-subtitle">A portfolio-grade machine learning healthcare platform demonstrating end-to-end ML deployment — from data collection to real-time prediction.</p>
+    </div>
+
+    <!-- Project Overview -->
+    <div class="about-card">
+      <div class="about-card-icon">🎯</div>
+      <h2>Project Goal</h2>
+      <p>SpineAI was developed to demonstrate the application of unsupervised machine learning in healthcare. The project covers the complete ML lifecycle: survey design, data collection, preprocessing, model training, evaluation, and production deployment through a full-stack web application.</p>
+      <p>The platform is designed as a portfolio showcase for <strong>Amazon ML Summer School</strong>, internship applications, and GitHub portfolios — demonstrating real-world skills in Python, Flask, scikit-learn, PCA, and K-Means clustering.</p>
+    </div>
+
+    <!-- Dataset Info -->
+    <div class="about-grid-2">
+      <div class="about-card">
+        <div class="about-card-icon">📊</div>
+        <h3>Dataset Information</h3>
+        <div class="about-stats-list">
+          <div class="about-stat-row">
+            <span class="about-stat-label">Original Participants</span>
+            <span class="about-stat-val">85</span>
+          </div>
+          <div class="about-stat-row">
+            <span class="about-stat-label">After Augmentation</span>
+            <span class="about-stat-val">250</span>
+          </div>
+          <div class="about-stat-row">
+            <span class="about-stat-label">Total Features</span>
+            <span class="about-stat-val">14 questions</span>
+          </div>
+          <div class="about-stat-row">
+            <span class="about-stat-label">ML Features Used</span>
+            <span class="about-stat-val">12</span>
+          </div>
+          <div class="about-stat-row">
+            <span class="about-stat-label">Data Collection</span>
+            <span class="about-stat-val">Google Forms Survey</span>
+          </div>
+          <div class="about-stat-row">
+            <span class="about-stat-label">Augmentation Method</span>
+            <span class="about-stat-val">NumPy random sampling</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🏷️</div>
+        <h3>Feature Categories</h3>
+        <div class="feature-tag-grid">
+          <div class="feature-tag ft-lifestyle">Age</div>
+          <div class="feature-tag ft-lifestyle">Gender</div>
+          <div class="feature-tag ft-pain">Morning Stiffness</div>
+          <div class="feature-tag ft-pain">Persistent Pain</div>
+          <div class="feature-tag ft-lifestyle">Sitting Hours</div>
+          <div class="feature-tag ft-lifestyle">Sitting Posture</div>
+          <div class="feature-tag ft-sleep">Sleeping Posture</div>
+          <div class="feature-tag ft-sleep">Sleep Turning</div>
+          <div class="feature-tag ft-sleep">Sleep Quality</div>
+          <div class="feature-tag ft-lifestyle">Physical Activity</div>
+          <div class="feature-tag ft-lifestyle">OTT Usage</div>
+          <div class="feature-tag ft-medical">Family Back Pain</div>
+          <div class="feature-tag ft-medical">Gut Infection</div>
+          <div class="feature-tag ft-medical">Spondylitis Dx</div>
+        </div>
+        <div class="feature-tag-legend">
+          <span><span class="legend-dot" style="background:#00C6FF"></span>Lifestyle</span>
+          <span><span class="legend-dot" style="background:#FF6B35"></span>Pain</span>
+          <span><span class="legend-dot" style="background:#A78BFA"></span>Sleep</span>
+          <span><span class="legend-dot" style="background:#34C759"></span>Medical</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="about-card">
+      <div class="about-card-icon">🛠️</div>
+      <h2>Technology Stack</h2>
+      <div class="tech-stack-grid">
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🐍</div>
+          <div class="tech-stack-name">Python 3.12</div>
+          <div class="tech-stack-role">Backend & ML</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🌶️</div>
+          <div class="tech-stack-name">Flask</div>
+          <div class="tech-stack-role">Web Framework</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🔬</div>
+          <div class="tech-stack-name">scikit-learn</div>
+          <div class="tech-stack-role">ML Library</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🔢</div>
+          <div class="tech-stack-name">NumPy</div>
+          <div class="tech-stack-role">Array Computing</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">💾</div>
+          <div class="tech-stack-name">Joblib</div>
+          <div class="tech-stack-role">Model Persistence</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">📊</div>
+          <div class="tech-stack-name">Chart.js</div>
+          <div class="tech-stack-role">Data Visualization</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🎨</div>
+          <div class="tech-stack-name">HTML/CSS/JS</div>
+          <div class="tech-stack-role">Frontend</div>
+        </div>
+        <div class="tech-stack-item">
+          <div class="tech-stack-icon">🚀</div>
+          <div class="tech-stack-name">Render</div>
+          <div class="tech-stack-role">Deployment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ML Algorithms -->
+    <div class="about-card">
+      <div class="about-card-icon">🤖</div>
+      <h2>Algorithms Used</h2>
+      <div class="algo-detail-grid">
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge primary">Primary</span>
+            <h4>PCA (Principal Component Analysis)</h4>
+          </div>
+          <p>Reduces 12 preprocessed features to 2 principal components for K-Means clustering and visualization. PC1 captures pain/symptom variance; PC2 captures lifestyle variance.</p>
+        </div>
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge primary">Primary</span>
+            <h4>K-Means Clustering (k=4)</h4>
+          </div>
+          <p>Unsupervised clustering using K-Means++ initialization. Optimal k determined by Elbow Method. Clusters manually labeled based on feature profiling.</p>
+        </div>
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge secondary">Explored</span>
+            <h4>DBSCAN</h4>
+          </div>
+          <p>Density-based clustering explored as an alternative. Found less suitable due to dataset density characteristics and sensitivity to epsilon parameter.</p>
+        </div>
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge secondary">Explored</span>
+            <h4>Hierarchical Clustering</h4>
+          </div>
+          <p>Agglomerative clustering with Ward linkage. Dendrogram analysis confirmed the 4-cluster structure, providing additional validation for K-Means results.</p>
+        </div>
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge secondary">Explored</span>
+            <h4>Gaussian Mixture Models</h4>
+          </div>
+          <p>Probabilistic clustering model explored for soft assignments. Similar cluster structure identified, confirming robustness of the 4-cluster framework.</p>
+        </div>
+        <div class="algo-detail-item">
+          <div class="algo-detail-header">
+            <span class="algo-badge metric">Metrics</span>
+            <h4>Evaluation Metrics</h4>
+          </div>
+          <p>Silhouette Score (separation + compactness), Davies-Bouldin Index (overlap), and Calinski-Harabasz Index (separation vs compactness ratio) used for evaluation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resume Section -->
+    <div class="resume-card">
+      <div class="resume-card-inner">
+        <div class="resume-orb"></div>
+        <h3>Portfolio Impact</h3>
+        <div class="resume-title-box">Spine Health Risk Assessment Platform</div>
+        <ul class="resume-bullets">
+          <li>Developed a full-stack machine learning web application for spinal health risk assessment using Python Flask and scikit-learn</li>
+          <li>Implemented PCA and K-Means based risk prediction using 14 lifestyle and medical indicators from 250+ data points</li>
+          <li>Designed and deployed an interactive health assessment platform with real-time ML inference and personalized recommendations</li>
+          <li>Built responsive frontend with glassmorphism design and integrated machine learning backend for predictive healthcare insights</li>
+          <li>Evaluated clustering performance using Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index</li>
+        </ul>
+        <div class="resume-tags">
+          <span>Python</span><span>Flask</span><span>scikit-learn</span><span>PCA</span>
+          <span>K-Means</span><span>NumPy</span><span>HTML/CSS/JS</span><span>Render</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-card">
+      <h4>⚕️ Medical Disclaimer</h4>
+      <p>SpineAI is a student machine learning project developed for educational purposes. It is not a medical device, is not FDA-approved, and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for any spinal health concerns.</p>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

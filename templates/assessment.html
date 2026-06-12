@@ -1,0 +1,393 @@
+{% extends "base.html" %}
+{% block title %}Assessment — SpineAI{% endblock %}
+
+{% block content %}
+<section class="assessment-section">
+  <div class="assessment-bg">
+    <div class="hero-orb hero-orb-1" style="opacity:0.3"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.2"></div>
+  </div>
+
+  <div class="assessment-container">
+    <!-- Header -->
+    <div class="assessment-header">
+      <div class="section-tag">14 Questions · ~3 Minutes</div>
+      <h1 class="assessment-title">Spine Health Assessment</h1>
+      <p class="assessment-subtitle">Answer honestly for the most accurate risk prediction. Your data is processed locally and never stored.</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-wrapper">
+      <div class="progress-info">
+        <span class="progress-label">Progress</span>
+        <span class="progress-count" id="progressCount">0 / 14</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="assessmentForm" class="assessment-form" novalidate>
+
+      <!-- Q1: Age -->
+      <div class="form-card animate-up" data-question="1" style="--delay:0s">
+        <div class="form-card-header">
+          <span class="q-number">01</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label" for="age">What is your Age?</label>
+        <input type="number" id="age" name="age" class="form-input" placeholder="e.g., 22" min="10" max="100" required/>
+        <div class="form-error" id="age-error"></div>
+      </div>
+
+      <!-- Q2: Gender -->
+      <div class="form-card animate-up" data-question="2" style="--delay:0.05s">
+        <div class="form-card-header">
+          <span class="q-number">02</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">What is your Gender?</label>
+        <div class="radio-group">
+          <label class="radio-card">
+            <input type="radio" name="gender" value="Male" required/>
+            <span class="radio-content">
+              <span class="radio-icon">👨</span>
+              <span class="radio-text">Male</span>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="gender" value="Female" required/>
+            <span class="radio-content">
+              <span class="radio-icon">👩</span>
+              <span class="radio-text">Female</span>
+            </span>
+          </label>
+        </div>
+        <div class="form-error" id="gender-error"></div>
+      </div>
+
+      <!-- Q3: Morning Stiffness -->
+      <div class="form-card animate-up" data-question="3" style="--delay:0.1s">
+        <div class="form-card-header">
+          <span class="q-number">03</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Have you experienced pain and <strong>stiffness</strong> in your back or neck when waking up in the morning in recent months or in past?</label>
+        <div class="radio-group radio-group-4">
+          <label class="radio-card">
+            <input type="radio" name="morning_stiffness" value="No" required/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">No</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="morning_stiffness" value="Mild"/>
+            <span class="radio-content"><span class="radio-icon">🟡</span><span class="radio-text">Mild</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="morning_stiffness" value="Moderate"/>
+            <span class="radio-content"><span class="radio-icon">🟠</span><span class="radio-text">Moderate</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="morning_stiffness" value="Severe"/>
+            <span class="radio-content"><span class="radio-icon">🔴</span><span class="radio-text">Severe</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="morning_stiffness-error"></div>
+      </div>
+
+      <!-- Q4: Persistent Pain -->
+      <div class="form-card animate-up" data-question="4" style="--delay:0.15s">
+        <div class="form-card-header">
+          <span class="q-number">04</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Have you experienced <strong>persistent</strong> back, neck or heel <strong>pain</strong> over the past few months (In past Three months)?</label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="persistent_pain" value="No pain" required/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">No pain</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="persistent_pain" value="Yes — for less than 3 months"/>
+            <span class="radio-content"><span class="radio-icon">🟡</span><span class="radio-text">Yes — for less than 3 months</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="persistent_pain" value="Yes — for about 3 months"/>
+            <span class="radio-content"><span class="radio-icon">🟠</span><span class="radio-text">Yes — for about 3 months</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="persistent_pain" value="Yes — for more than 3 months"/>
+            <span class="radio-content"><span class="radio-icon">🔴</span><span class="radio-text">Yes — for more than 3 months</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="persistent_pain-error"></div>
+      </div>
+
+      <!-- Q5: Sitting Hours -->
+      <div class="form-card animate-up" data-question="5" style="--delay:0.2s">
+        <div class="form-card-header">
+          <span class="q-number">05</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label" for="sitting_hours">Approximately how many hours per day are spent in <strong>seated activities</strong> such as studying, working, or screen use?</label>
+        <div class="input-with-unit">
+          <input type="number" id="sitting_hours" name="sitting_hours" class="form-input" placeholder="e.g., 6" min="0" max="24" step="0.5" required/>
+          <span class="input-unit">hours/day</span>
+        </div>
+        <div class="form-error" id="sitting_hours-error"></div>
+      </div>
+
+      <!-- Q6: Sitting Posture -->
+      <div class="form-card animate-up" data-question="6" style="--delay:0.25s">
+        <div class="form-card-header">
+          <span class="q-number">06</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Your usual sitting posture?</label>
+        <div class="radio-group radio-group-3">
+          <label class="radio-card">
+            <input type="radio" name="sitting_posture" value="Straight" required/>
+            <span class="radio-content"><span class="radio-icon">🧍</span><span class="radio-text">Straight</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="sitting_posture" value="Slouched"/>
+            <span class="radio-content"><span class="radio-icon">🪑</span><span class="radio-text">Slouched</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="sitting_posture" value="Bent"/>
+            <span class="radio-content"><span class="radio-icon">🔄</span><span class="radio-text">Bent</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="sitting_posture-error"></div>
+      </div>
+
+      <!-- Q7: Sleeping Posture -->
+      <div class="form-card animate-up" data-question="7" style="--delay:0.3s">
+        <div class="form-card-header">
+          <span class="q-number">07</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Your usual Sleeping posture?</label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleeping_posture" value="On my back" required/>
+            <span class="radio-content"><span class="radio-icon">🛌</span><span class="radio-text">On my back</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleeping_posture" value="On my side"/>
+            <span class="radio-content"><span class="radio-icon">💤</span><span class="radio-text">On my side</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleeping_posture" value="On my stomach"/>
+            <span class="radio-content"><span class="radio-icon">🙃</span><span class="radio-text">On my stomach</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleeping_posture" value="I change positions frequently"/>
+            <span class="radio-content"><span class="radio-icon">🔀</span><span class="radio-text">I change positions frequently</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="sleeping_posture-error"></div>
+      </div>
+
+      <!-- Q8: Sleep Turning -->
+      <div class="form-card animate-up" data-question="8" style="--delay:0.35s">
+        <div class="form-card-header">
+          <span class="q-number">08</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Do you experience <strong>discomfort or difficulty in turning sides during sleep</strong> due to inadequate neck or pillow support?</label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleep_turning" value="No" required/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">No</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleep_turning" value="Mild difficulty"/>
+            <span class="radio-content"><span class="radio-icon">🟡</span><span class="radio-text">Mild difficulty</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleep_turning" value="Moderate difficulty"/>
+            <span class="radio-content"><span class="radio-icon">🟠</span><span class="radio-text">Moderate difficulty</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="sleep_turning" value="Severe difficulty / frequent waking"/>
+            <span class="radio-content"><span class="radio-icon">🔴</span><span class="radio-text">Severe difficulty / frequent waking</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="sleep_turning-error"></div>
+      </div>
+
+      <!-- Q9: Sleep Quality -->
+      <div class="form-card animate-up" data-question="9" style="--delay:0.4s">
+        <div class="form-card-header">
+          <span class="q-number">09</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">How would you rate your overall sleep quality?</label>
+        <div class="radio-group radio-group-4">
+          <label class="radio-card">
+            <input type="radio" name="sleep_quality" value="Excellent" required/>
+            <span class="radio-content"><span class="radio-icon">⭐⭐⭐</span><span class="radio-text">Excellent</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="sleep_quality" value="Good"/>
+            <span class="radio-content"><span class="radio-icon">⭐⭐</span><span class="radio-text">Good</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="sleep_quality" value="Average"/>
+            <span class="radio-content"><span class="radio-icon">⭐</span><span class="radio-text">Average</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="sleep_quality" value="Poor"/>
+            <span class="radio-content"><span class="radio-icon">😴</span><span class="radio-text">Poor</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="sleep_quality-error"></div>
+      </div>
+
+      <!-- Q10: Physical Activity -->
+      <div class="form-card animate-up" data-question="10" style="--delay:0.45s">
+        <div class="form-card-header">
+          <span class="q-number">10</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Do you exercise or do any kind of physical activity?</label>
+        <div class="radio-group radio-group-4">
+          <label class="radio-card">
+            <input type="radio" name="physical_activity" value="Daily" required/>
+            <span class="radio-content"><span class="radio-icon">🏃</span><span class="radio-text">Daily</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="physical_activity" value="Weekly"/>
+            <span class="radio-content"><span class="radio-icon">🚴</span><span class="radio-text">Weekly</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="physical_activity" value="Rarely"/>
+            <span class="radio-content"><span class="radio-icon">🚶</span><span class="radio-text">Rarely</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="physical_activity" value="Never"/>
+            <span class="radio-content"><span class="radio-icon">🛋️</span><span class="radio-text">Never</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="physical_activity-error"></div>
+      </div>
+
+      <!-- Q11: OTT Usage -->
+      <div class="form-card animate-up" data-question="11" style="--delay:0.5s">
+        <div class="form-card-header">
+          <span class="q-number">11</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Do you regularly watch OTT platforms (for example, movies or web series)?</label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="ott_usage" value="Yes, regularly" required/>
+            <span class="radio-content"><span class="radio-icon">📺</span><span class="radio-text">Yes, regularly</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="ott_usage" value="Weekly"/>
+            <span class="radio-content"><span class="radio-icon">🎬</span><span class="radio-text">Weekly</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="ott_usage" value="Once or twice in a month"/>
+            <span class="radio-content"><span class="radio-icon">🎞️</span><span class="radio-text">Once or twice in a month</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="ott_usage" value="Very less, Once in few months"/>
+            <span class="radio-content"><span class="radio-icon">📱</span><span class="radio-text">Very less, Once in few months</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="ott_usage-error"></div>
+      </div>
+
+      <!-- Q12: Family Back Pain -->
+      <div class="form-card animate-up" data-question="12" style="--delay:0.55s">
+        <div class="form-card-header">
+          <span class="q-number">12</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Have your parents ever been diagnosed with or experienced <strong>Chronic (Long-term) back pain or neck pain?</strong></label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="family_backpain" value="Never" required/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">Never</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="family_backpain" value="Yes — diagnosed chronic back/neck pain"/>
+            <span class="radio-content"><span class="radio-icon">🏥</span><span class="radio-text">Yes — diagnosed chronic back/neck pain</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="family_backpain" value="Yes — long-term back/neck pain, not formally diagnosed"/>
+            <span class="radio-content"><span class="radio-icon">🔍</span><span class="radio-text">Yes — long-term back/neck pain, not formally diagnosed</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="family_backpain-error"></div>
+      </div>
+
+      <!-- Q13: Gut Infection -->
+      <div class="form-card animate-up" data-question="13" style="--delay:0.6s">
+        <div class="form-card-header">
+          <span class="q-number">13</span>
+          <span class="q-required">Required</span>
+        </div>
+        <label class="form-label">Have you ever been diagnosed with any moderate or severe <strong>gut infection</strong> in your life?</label>
+        <div class="radio-group radio-group-col">
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="gut_infection" value="Never" required/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">Never</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="gut_infection" value="Yes — diagnosed gut infection (moderate)"/>
+            <span class="radio-content"><span class="radio-icon">🟡</span><span class="radio-text">Yes — diagnosed gut infection (moderate)</span></span>
+          </label>
+          <label class="radio-card radio-card-full">
+            <input type="radio" name="gut_infection" value="Yes — diagnosed gut infection (severe / hospitalized)"/>
+            <span class="radio-content"><span class="radio-icon">🔴</span><span class="radio-text">Yes — diagnosed gut infection (severe / hospitalized)</span></span>
+          </label>
+        </div>
+        <div class="form-error" id="gut_infection-error"></div>
+      </div>
+
+      <!-- Q14: Spondylitis -->
+      <div class="form-card animate-up" data-question="14" style="--delay:0.65s">
+        <div class="form-card-header">
+          <span class="q-number">14</span>
+          <span class="q-optional">Optional</span>
+        </div>
+        <label class="form-label">Have you ever been <strong>formally diagnosed</strong> with Spondylitis?</label>
+        <p class="form-note">Note: This question is collected for context but is not used in the ML model.</p>
+        <div class="radio-group">
+          <label class="radio-card">
+            <input type="radio" name="spondylitis" value="Yes"/>
+            <span class="radio-content"><span class="radio-icon">🏥</span><span class="radio-text">Yes</span></span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="spondylitis" value="No"/>
+            <span class="radio-content"><span class="radio-icon">✅</span><span class="radio-text">No</span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="form-submit-wrapper">
+        <div class="form-validation-msg" id="formValidationMsg"></div>
+        <button type="submit" class="btn-primary btn-submit" id="submitBtn">
+          <span class="btn-text">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Analyze My Spine Risk
+          </span>
+          <span class="btn-loading" style="display:none">
+            <span class="spinner"></span> Analyzing...
+          </span>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/assessment.js') }}?v=4"></script>
+{% endblock %}

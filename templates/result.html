@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %}Your Results — SpineAI{% endblock %}
+
+{% block content %}
+{% if not result %}
+<section class="section" style="min-height: 80vh; display:flex; align-items:center; justify-content:center;">
+  <div class="container" style="text-align:center;">
+    <div style="font-size:4rem;margin-bottom:1rem;">🔍</div>
+    <h2 style="color:var(--text-primary); margin-bottom:1rem;">No Assessment Data Found</h2>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Please complete the assessment first to view your results.</p>
+    <a href="/assessment" class="btn-primary">Take Assessment</a>
+  </div>
+</section>
+{% else %}
+
+<section class="result-section">
+  <div class="result-bg">
+    <div class="hero-orb hero-orb-1" style="opacity:0.25"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.15"></div>
+  </div>
+
+  <div class="result-container">
+
+    <!-- Result Hero Card -->
+    <div class="result-hero-card result-{{ result.risk_level }}">
+      <div class="result-hero-inner">
+        <div class="result-cluster-badge">Cluster {{ result.cluster }}</div>
+        <div class="result-icon">{{ result.risk_icon }}</div>
+        <h1 class="result-risk-label">{{ result.risk_label }}</h1>
+        <p class="result-urgency">{{ result.urgency }}</p>
+        <p class="result-description">{{ result.risk_description }}</p>
+
+        <!-- Risk Meter -->
+        <div class="risk-meter-wrapper">
+          <div class="risk-meter-label">Risk Score</div>
+          <div class="risk-meter-track">
+            <div class="risk-meter-fill" id="riskMeterFill" style="width: 0%"
+                 data-score="{{ result.risk_score }}"></div>
+            <div class="risk-meter-needle" id="riskMeterNeedle" style="left: 0%"
+                 data-score="{{ result.risk_score }}"></div>
+          </div>
+          <div class="risk-meter-labels">
+            <span>Low</span><span>Moderate</span><span>High</span><span>Very High</span>
+          </div>
+          <div class="risk-score-display" id="riskScoreDisplay">0</div>
+          <div class="risk-score-sub">/ 100</div>
+        </div>
+
+        <!-- PCA Coordinates -->
+        <div class="pca-coords">
+          <span class="pca-coord">PC1: {{ result.pc1 }}</span>
+          <span class="pca-coord-sep">·</span>
+          <span class="pca-coord">PC2: {{ result.pc2 }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-Column Layout -->
+    <div class="result-grid">
+
+      <!-- Contributing Factors -->
+      <div class="result-card">
+        <div class="result-card-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <h3>Contributing Factors</h3>
+        </div>
+        <div class="factors-list">
+          {% for factor in result.contributing_factors %}
+          <div class="factor-item">
+            <div class="factor-header">
+              <span class="factor-name">{{ factor.name }}</span>
+              <span class="factor-pct factor-{{ factor.level }}">{{ factor.percentage }}%</span>
+            </div>
+            <div class="factor-bar-bg">
+              <div class="factor-bar factor-bar-{{ factor.level }}"
+                   style="width: 0%"
+                   data-width="{{ factor.percentage }}%"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Assessment Summary -->
+      <div class="result-card">
+        <div class="result-card-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <h3>Assessment Summary</h3>
+        </div>
+        <div class="summary-grid">
+          {% for item in result.summary %}
+          <div class="summary-item">
+            <div class="summary-label">{{ item.label }}</div>
+            <div class="summary-value">{{ item.value }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recommendations -->
+    <div class="recommendations-section">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <div class="section-tag">Personalized for You</div>
+        <h2 class="section-title" style="font-size: 1.8rem;">Your Recommendations</h2>
+      </div>
+      <div class="rec-grid">
+        {% for rec in result.recommendations %}
+        <div class="rec-card animate-up" style="--delay: {{ loop.index0 * 0.1 }}s">
+          <div class="rec-icon">{{ rec.icon }}</div>
+          <h4>{{ rec.title }}</h4>
+          <p>{{ rec.text }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ML Tech Details -->
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2"/></svg>
+        <h4>ML Model Details</h4>
+      </div>
+      <div class="tech-details">
+        <div class="tech-item">
+          <span class="tech-label">Algorithm</span>
+          <span class="tech-value">K-Means Clustering (k=4)</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Preprocessing</span>
+          <span class="tech-value">StandardScaler + OrdinalEncoder + OneHotEncoder</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Dimensionality Reduction</span>
+          <span class="tech-value">PCA (12D → 2D)</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">Assigned Cluster</span>
+          <span class="tech-value">Cluster {{ result.cluster }} ({{ result.risk_label }})</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">PC Coordinates</span>
+          <span class="tech-value">PC1={{ result.pc1 }}, PC2={{ result.pc2 }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer & Actions -->
+    <div class="result-actions">
+      <div class="disclaimer-box">
+        ⚠️ <strong>Medical Disclaimer:</strong> This assessment is for educational purposes only and does not constitute medical advice. Please consult a qualified healthcare professional for any health concerns.
+      </div>
+      <div class="action-buttons">
+        <a href="/assessment" class="btn-ghost">Retake Assessment</a>
+        <a href="/analytics" class="btn-primary">View Analytics</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const riskScore = {{ result.risk_score }};
+  const riskColor = "{{ result.risk_color }}";
+</script>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}

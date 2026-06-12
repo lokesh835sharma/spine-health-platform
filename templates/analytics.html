@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% block title %}Analytics Dashboard — SpineAI{% endblock %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="analytics-section">
+  <div class="analytics-bg">
+    <div class="hero-orb hero-orb-1" style="opacity:0.2"></div>
+    <div class="hero-orb hero-orb-2" style="opacity:0.15"></div>
+  </div>
+
+  <div class="analytics-container">
+
+    <!-- Header -->
+    <div class="analytics-header">
+      <div class="section-tag">Machine Learning Insights</div>
+      <h1 class="analytics-title">Analytics Dashboard</h1>
+      <p class="analytics-subtitle">Explore the machine learning model performance, cluster distributions, and PCA components that power the SpineAI risk assessment.</p>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="analytics-stats">
+      <div class="analytics-stat-card">
+        <div class="analytics-stat-icon">📊</div>
+        <div class="analytics-stat-number">250</div>
+        <div class="analytics-stat-label">Total Data Points</div>
+      </div>
+      <div class="analytics-stat-card">
+        <div class="analytics-stat-icon">🧬</div>
+        <div class="analytics-stat-number">14</div>
+        <div class="analytics-stat-label">Input Features</div>
+      </div>
+      <div class="analytics-stat-card">
+        <div class="analytics-stat-icon">🎯</div>
+        <div class="analytics-stat-number">4</div>
+        <div class="analytics-stat-label">Risk Clusters</div>
+      </div>
+      <div class="analytics-stat-card">
+        <div class="analytics-stat-icon">📉</div>
+        <div class="analytics-stat-number" id="varianceDisplay">~72%</div>
+        <div class="analytics-stat-label">Variance Retained (PCA)</div>
+      </div>
+      <div class="analytics-stat-card">
+        <div class="analytics-stat-icon">⚡</div>
+        <div class="analytics-stat-number">K-Means++</div>
+        <div class="analytics-stat-label">Initialization Method</div>
+      </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="charts-grid-2">
+
+      <!-- Risk Distribution -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Risk Distribution</h3>
+          <p>Estimated cluster population distribution across the dataset</p>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="riskDistChart"></canvas>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#34C759"></span>Low Risk (Cluster 2)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#FF9500"></span>Moderate Risk (Cluster 3)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#FF6B35"></span>High Risk (Cluster 0)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#FF2D55"></span>Very High Risk (Cluster 1)</div>
+        </div>
+      </div>
+
+      <!-- PCA Explained Variance -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>PCA Explained Variance</h3>
+          <p>Variance captured by each principal component</p>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="pcaVarianceChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PCA Scatter Plot -->
+    <div class="chart-card chart-card-full">
+      <div class="chart-card-header">
+        <h3>PCA Cluster Visualization (2D)</h3>
+        <p>K-Means clusters projected onto the first two principal components. Each point represents a risk profile. Cluster centers are marked with ✕.</p>
+      </div>
+      <div class="chart-wrapper chart-wrapper-tall">
+        <canvas id="pcaScatterChart"></canvas>
+      </div>
+      <div class="chart-legend chart-legend-row">
+        <div class="legend-item"><span class="legend-dot" style="background:#FF6B35"></span>Cluster 0: High Risk</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#FF2D55"></span>Cluster 1: Very High Risk</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#34C759"></span>Cluster 2: Low Risk</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#00C6FF"></span>Cluster 3: Moderate Risk</div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="charts-grid-2">
+
+      <!-- Feature Importance (Radar) -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Risk Factor Radar</h3>
+          <p>Relative weight of health indicators in the PCA model</p>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Cluster Comparison Bar -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Cluster Risk Score Comparison</h3>
+          <p>Risk score assigned to each cluster</p>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="clusterBarChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ML Overview -->
+    <div class="ml-overview-card">
+      <div class="section-tag" style="margin-bottom:1rem;">ML Architecture</div>
+      <h3 style="color:var(--text-primary);margin-bottom:1.5rem;font-size:1.4rem;">Model Architecture Overview</h3>
+      <div class="ml-steps">
+        <div class="ml-step">
+          <div class="ml-step-num">01</div>
+          <div class="ml-step-body">
+            <h4>Data Collection</h4>
+            <p>85 original survey responses from participants on lifestyle, posture, sleep, physical activity, and medical history. Extended to 250 via synthetic data augmentation.</p>
+          </div>
+        </div>
+        <div class="ml-step">
+          <div class="ml-step-num">02</div>
+          <div class="ml-step-body">
+            <h4>Preprocessing Pipeline</h4>
+            <p><strong>Age & Sitting Hours:</strong> Median imputation + StandardScaler<br>
+            <strong>Gender:</strong> OneHotEncoder (drop first) + StandardScaler<br>
+            <strong>10 categorical features:</strong> OrdinalEncoder (ordered categories) + StandardScaler</p>
+          </div>
+        </div>
+        <div class="ml-step">
+          <div class="ml-step-num">03</div>
+          <div class="ml-step-body">
+            <h4>PCA Transformation</h4>
+            <p>PCA reduces 12 scaled features into 2 principal components. PC1 captures <em>pain-related variance</em> (pain, stiffness, family history). PC2 captures <em>lifestyle variance</em> (sitting, OTT, activity).</p>
+          </div>
+        </div>
+        <div class="ml-step">
+          <div class="ml-step-num">04</div>
+          <div class="ml-step-body">
+            <h4>K-Means Clustering (k=4)</h4>
+            <p>K-Means++ initialization with random_state=42. Optimal k=4 selected via Elbow Method. Evaluated using Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index.</p>
+          </div>
+        </div>
+        <div class="ml-step">
+          <div class="ml-step-num">05</div>
+          <div class="ml-step-body">
+            <h4>Cluster Labeling</h4>
+            <p>Clusters labeled by analyzing mean feature values per cluster:<br>
+            Cluster 0 → High Risk · Cluster 1 → Very High Risk · Cluster 2 → Low Risk · Cluster 3 → Moderate Risk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Algorithms -->
+    <div class="algo-cards">
+      <div class="section-tag" style="margin-bottom:1.5rem;">Other Algorithms Explored</div>
+      <div class="algo-grid">
+        <div class="algo-card">
+          <div class="algo-icon">🌊</div>
+          <h4>DBSCAN</h4>
+          <p>Density-based clustering — effective for irregular shapes but sensitive to epsilon parameter on this dataset.</p>
+        </div>
+        <div class="algo-card">
+          <div class="algo-icon">🌳</div>
+          <h4>Hierarchical Clustering</h4>
+          <p>Agglomerative clustering with Ward linkage. Dendrogram confirmed 4-cluster structure, validating K-Means choice.</p>
+        </div>
+        <div class="algo-card">
+          <div class="algo-icon">🎲</div>
+          <h4>Gaussian Mixture Models</h4>
+          <p>Probabilistic clustering that assigns soft cluster memberships. Provided similar 4-cluster structure with probability scores.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const STATS = {{ stats|safe }};
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

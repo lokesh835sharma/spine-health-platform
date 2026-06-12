@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block title %}SpineAI — ML-Powered Spinal Health Risk Assessment{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-container">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>AI-Powered Healthcare · PCA + K-Means Clustering</span>
+    </div>
+    <h1 class="hero-title">
+      Predict Your <span class="gradient-text">Spinal Health</span><br>
+      Risk in Minutes
+    </h1>
+    <p class="hero-subtitle">
+      Answer 14 evidence-based questions about your lifestyle, posture, and medical history.
+      Our machine learning model will assess your spinal health risk and deliver personalized recommendations.
+    </p>
+    <div class="hero-actions">
+      <a href="/assessment" class="btn-primary btn-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Start Free Assessment
+      </a>
+      <a href="/analytics" class="btn-ghost btn-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        View Analytics
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-number">250+</div>
+        <div class="stat-label">Data Points</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="stat-number">14</div>
+        <div class="stat-label">Health Indicators</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Risk Clusters</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="stat-number">2D</div>
+        <div class="stat-label">PCA Reduction</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section features-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-title">AI-Driven Risk Intelligence</h2>
+      <p class="section-subtitle">A clinically-informed machine learning pipeline that transforms your lifestyle data into actionable health insights.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card animate-up" style="--delay: 0s">
+        <div class="feature-icon feature-icon-blue">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <h3>Smart Questionnaire</h3>
+        <p>14 carefully designed questions covering posture, pain, sleep, activity, and medical history — all evidence-based indicators.</p>
+      </div>
+      <div class="feature-card animate-up" style="--delay: 0.1s">
+        <div class="feature-icon feature-icon-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Instant Analysis</h3>
+        <p>Results delivered in under a second. Our preprocessing pipeline handles scaling, encoding, PCA transformation, and K-Means clustering in real time.</p>
+      </div>
+      <div class="feature-card animate-up" style="--delay: 0.2s">
+        <div class="feature-icon feature-icon-purple">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>PCA Dimensionality Reduction</h3>
+        <p>Principal Component Analysis compresses 12 features into 2 principal components, capturing the most significant variance in spinal health patterns.</p>
+      </div>
+      <div class="feature-card animate-up" style="--delay: 0.3s">
+        <div class="feature-icon feature-icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </div>
+        <h3>K-Means Clustering</h3>
+        <p>Your health profile is matched against 4 distinct risk clusters identified from real-world data using K-Means++ initialization for optimal accuracy.</p>
+      </div>
+      <div class="feature-card animate-up" style="--delay: 0.4s">
+        <div class="feature-icon feature-icon-orange">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+        </div>
+        <h3>Risk Stratification</h3>
+        <p>Clear categorization into Low, Moderate, High, or Very High risk levels with personalized interpretation and urgency guidance.</p>
+      </div>
+      <div class="feature-card animate-up" style="--delay: 0.5s">
+        <div class="feature-icon feature-icon-pink">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Personalized Recommendations</h3>
+        <p>Six targeted, actionable recommendations generated dynamically based on your specific risk cluster — not generic advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Risk Categories Section -->
+<section class="section risk-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Risk Categories</div>
+      <h2 class="section-title">4 Cluster Risk Framework</h2>
+      <p class="section-subtitle">Our K-Means model identifies four distinct spinal health risk profiles based on symptom patterns and lifestyle indicators.</p>
+    </div>
+    <div class="risk-cards">
+      <div class="risk-card risk-low animate-up" style="--delay: 0s">
+        <div class="risk-card-header">
+          <span class="risk-badge risk-badge-low">Cluster 2</span>
+          <span class="risk-emoji">✅</span>
+        </div>
+        <h3>Low Risk</h3>
+        <p>Minimal pain indicators, low family history, healthy lifestyle habits. Maintain your current routine.</p>
+        <div class="risk-bar-container">
+          <div class="risk-bar risk-bar-low" style="width: 20%"></div>
+        </div>
+        <span class="risk-score">20 / 100</span>
+      </div>
+      <div class="risk-card risk-moderate animate-up" style="--delay: 0.1s">
+        <div class="risk-card-header">
+          <span class="risk-badge risk-badge-moderate">Cluster 3</span>
+          <span class="risk-emoji">⚡</span>
+        </div>
+        <h3>Moderate Risk</h3>
+        <p>Lifestyle-driven risk factors. Sedentary habits and poor posture are contributing. Prevention is key.</p>
+        <div class="risk-bar-container">
+          <div class="risk-bar risk-bar-moderate" style="width: 50%"></div>
+        </div>
+        <span class="risk-score">50 / 100</span>
+      </div>
+      <div class="risk-card risk-high animate-up" style="--delay: 0.2s">
+        <div class="risk-card-header">
+          <span class="risk-badge risk-badge-high">Cluster 0</span>
+          <span class="risk-emoji">⚠️</span>
+        </div>
+        <h3>High Risk</h3>
+        <p>Family history combined with moderate symptoms. Professional consultation recommended soon.</p>
+        <div class="risk-bar-container">
+          <div class="risk-bar risk-bar-high" style="width: 75%"></div>
+        </div>
+        <span class="risk-score">75 / 100</span>
+      </div>
+      <div class="risk-card risk-very-high animate-up" style="--delay: 0.3s">
+        <div class="risk-card-header">
+          <span class="risk-badge risk-badge-veryhigh">Cluster 1</span>
+          <span class="risk-emoji">🚨</span>
+        </div>
+        <h3>Very High Risk</h3>
+        <p>Severe symptoms, strong family history, multiple compounding factors. Immediate medical attention advised.</p>
+        <div class="risk-bar-container">
+          <div class="risk-bar risk-bar-very-high" style="width: 95%"></div>
+        </div>
+        <span class="risk-score">95 / 100</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ML Pipeline Section -->
+<section class="section pipeline-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">ML Architecture</div>
+      <h2 class="section-title">The Prediction Pipeline</h2>
+    </div>
+    <div class="pipeline-flow">
+      <div class="pipeline-step">
+        <div class="pipeline-icon">📝</div>
+        <div class="pipeline-label">User Input</div>
+        <div class="pipeline-desc">14 questions</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">⚙️</div>
+        <div class="pipeline-label">Preprocessing</div>
+        <div class="pipeline-desc">Scale + Encode</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">🔢</div>
+        <div class="pipeline-label">PCA</div>
+        <div class="pipeline-desc">12D → 2D</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">🎯</div>
+        <div class="pipeline-label">K-Means</div>
+        <div class="pipeline-desc">4 Clusters</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">📊</div>
+        <div class="pipeline-label">Risk Report</div>
+        <div class="pipeline-desc">+ Recommendations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-orb cta-orb-1"></div>
+      <div class="cta-orb cta-orb-2"></div>
+      <div class="cta-content">
+        <h2>Ready to Assess Your Spinal Health?</h2>
+        <p>Takes only 3 minutes. Get your personalized risk assessment powered by machine learning.</p>
+        <a href="/assessment" class="btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Take Assessment Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
