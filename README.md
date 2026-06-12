@@ -2,7 +2,7 @@
 
 > ML-powered spinal health risk prediction using PCA + K-Means Clustering
 
-**Live Demo:** 
+**Live Demo:** https://spine-health-platform.onrender.com
 
 ---
 
